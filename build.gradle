@@ -1,0 +1,87 @@
+version '1.4'
+
+apply plugin: 'java'
+apply plugin : 'eclipse'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  //compileOnly 'com.appian:connected-systems-core:1.2.0'
+ // implementation 'com.appian:connected-systems-client:1.1.0'
+  
+  compileOnly 'com.appian:connected-systems-core:1.2.0'
+  implementation 'com.appian:connected-systems-client:1.1.0'
+  
+  implementation platform('software.amazon.awssdk:bom:2.20.45') 
+ implementation 'software.amazon.awssdk:aws-core'
+  
+  // https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-secretsmanager
+implementation group: 'com.amazonaws', name: 'aws-java-sdk-secretsmanager', version: '1.12.587'
+  
+  implementation group: 'com.google.code.gson', name: 'gson', version: '2.10.1'
+  // https://mvnrepository.com/artifact/software.amazon.awssdk/textract
+implementation group: 'software.amazon.awssdk', name: 'textract'
+
+// https://mvnrepository.com/artifact/software.amazon.awssdk/textract
+//implementation 'software.amazon.awssdk:textract:2.20.43'
+
+
+
+//Thanks for using https://jar-download.com
+
+// https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl
+//testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.21.0'
+// https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.9'
+
+ implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.20.0'
+     implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.20.0'
+     implementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.20.0'
+	 
+// https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
+testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.9'
+
+  
+  //testImplementation 'junit:junit:4.13,1'
+//  compile fileTree(dir: 'libs', include: '*.jar')
+ implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+}
+
+jar {
+  duplicatesStrategy = DuplicatesStrategy.FAIL
+  into('META-INF/lib') {
+    from(configurations.runtimeClasspath)
+  }
+
+  manifest {
+    attributes("Spring-Context": "*;publish-context:=false")
+  }
+  
+   into 'src', {
+        from 'src'
+    }
+  
+
+  }
+
+java {
+    withSourcesJar()
+    // and/or analogously use “withJavadocJar()” to get a “javadocJar” task
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+       
+    }
+    test {
+        java {
+            srcDir 'test'
+        }
+    }
+}

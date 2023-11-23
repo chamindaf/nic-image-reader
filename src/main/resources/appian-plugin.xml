@@ -1,0 +1,20 @@
+<appian-plugin name="NIC Data Extractor"
+	key="com.lowcode.combank.NICORC">
+
+	<plugin-info>
+		<description>Extract NIC number  from SL Identify card</description>
+		<vendor name="LowCodeMinds" url="http://www.mycorp.com" />
+		<version>1.1.0.2</version>
+		<application-version min="7.6.0.4" />
+	</plugin-info>
+
+	<connected-system-template
+		key="NICConnectedSystemTemplate" name="NICConnectedSystemTemplate"
+		class="com.lowcode.combank.NICConnectedSystemTemplate">
+
+		<integration-template
+			key="NICIntegrationTemplate" name="NICIntegrationTemplate"
+			class="com.lowcode.combank.NICIntegrationTemplate" />
+
+	</connected-system-template>
+</appian-plugin>
